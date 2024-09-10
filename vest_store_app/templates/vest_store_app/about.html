@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/vest.css' %}" />
+</head>
+<style>
+
+    header {
+      background-color: #4C4E52;
+      color: white;
+      padding: 1.3em;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      text-align: left;
+    }
+
+    nav ul li {
+      display: inline;
+      margin: 0 10px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    body{
+        background-color: rgb(238, 238, 234);
+    }
+
+    .heading{
+        width:60%;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        margin:95px auto;
+        text-align: justify;
+    }
+
+    .heading h1{
+        font-size: 40px;
+        color: #333;
+        margin-bottom:25px;
+        position: relative;
+    }
+
+    .heading h1::after{
+        content: "";
+        width: 100%;
+        height: 4px;
+        background-color: #4caf50;
+        position: absolute;
+        display:block;
+        margin: 0 auto;
+    }
+
+    .heading p{
+        font-size:18px;
+        color:#666;
+        margin-bottom: 10px;
+    }
+    @media only screen and (max-width: 768px) {
+        .heading{
+            width:90%;
+        }
+    }
+
+    .cart-symbol {
+                  position: fixed;
+                  top: 20px;
+                  right: 25px;
+                  font-size: 25px;
+                  color: #ffffff;
+                  cursor: pointer;
+                  z-index: 1005;
+                }
+
+
+
+
+
+    footer {
+      background-color: #4C4E52;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width:100%;
+      border-radius: 10px;
+      z-index: 99;
+    }
+
+    </style>
+
+    <body>
+
+        <header>
+            <nav>
+              <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about_page' %}">About Us</a></li>
+                  <div id ="cartSymbol" class="cart-symbol"><a href="{% url 'cart_page' %}"> 🛒</a></div>
+                <li><a href="https://www.paypal.com/donate?hosted_button_id=VVFT6TBDPMCZL&no_recurring=0&currency_code=USD" id="donateLink" target="_blank">Donate</a></li>
+              </ul>
+            </nav>
+          </header>
+
+          <div class="heading">
+            <h1>About Vest Store</h1>
+               <p>"We are a nonprofit organization passionately dedicated to enhancing the safety of neighborhood walkers and joggers. Our mission is simple yet crucial: we strive to promote visibility and safeguard individuals as they navigate their communities. We work hard to reduce accidents and cultivate a culture of awareness on the streets.</p>
+                <p>Our lightweight vest is designed to make pedestrians more visible to motorists, cyclists, and fellow pedestrians alike. It serves as both a safety measure and a statement, reminding everyone to slow down and pay attention to those sharing the road. </p>
+                <p>By wearing our vest, individuals can significantly increase their presence, especially during low-light conditions or high-traffic areas. Our commitment to community well-being empowers individuals to take charge of their safety while fostering a sense of unity and responsibility among neighbors. Join us in our journey towards safer streets in our neighborhood."</p>
+            <br>
+
+            </div>
+        </div>
+        </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var donateLink = document.getElementById('donateLink');
+      donateLink.addEventListener('click', function(event) {
+          event.preventDefault(); // Prevent the default link behavior
+  
+          var url = "https://www.paypal.com/ncp/payment/MGJY8HJHGGT7C";
+          var width = 600;
+          var height = 400;
+          var left = (window.innerWidth - width) / 2;
+          var top = (window.innerHeight - height) / 2;
+          var options = 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=' + width + ',height=' + height + ',top=' + top + ',left=' + left;
+  
+          window.open(url, 'PayPal_Donation', options); // Open the popup window
+      });
+    });
+  </script>
+    <footer style="padding: 1em; text-align: center;">
+            <p style="margin-bottom: auto;"><b>Contact Us:</b> <a href="mailto:25mphvest@gmail.com">25mphvest@gmail.com</a> <br>
+             
+    </footer>
+
+
+
+
+
+
+
+
+    </body>
+
+    </html>
+

@@ -1,0 +1,318 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Vest Store</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/vest.css' %}" />
+  </head>
+  <body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about_page' %}">About Us</a></li>
+        <li><a href="https://www.paypal.com/ncp/payment/MGJY8HJHGGT7C" id="donateLink" target="_blank">Donate</a></li>
+        
+      </ul>
+    </nav>
+</header>
+    
+  <section id="home" class="bg-cover hero-section" >
+    <div class="overlay"></div>
+    <div class="container text-white ">
+      <div class="row">
+        <div class="col-12">
+          <div class="content-block" >
+            <h2 class="main-title" data-v-946d0c05 data-cmp-info="9" style="font-size:35px; font-weight:bold; color:#fff"> Stay Safe with 25 MPH Vest</h2>
+            <p class="custom-paragraph" data-aos="fade-up" style="font-size:22px; text-align:justify;"  >
+              Enhance your visibility and stay safe during outdoor activities with our lightweight vest.Perfect for cyclists, joggers, and walkers alike. </p>
+           
+          </div> 
+          <br>
+                <a href="#services" data-aos="fade-up" class="btn btn-main" id="getStartedButton" style="min-width:200px">View Product</a>
+
+            </div>
+        </div>
+    </div>
+</section> 
+
+<section id="services">
+<div class="main-wrapper" id="productDetails">
+  <!-- <div class="container"> -->
+    <div class ="product-div">
+      <div class= "product-div-left">
+        <div class="product-slider">
+          <div class="slider slider1">
+              <!--<div class="slide"><img src="{% static 'images/shop8.png' %}" alt="Vest Image" ></div>-->
+              <div class="slide"><img src="{% static 'images/img12.png' %}" alt="Image 1"></div>
+              <div class="slide"><img src="{% static 'images/img33.png' %}" alt="Image 2"></div>
+              <div class="slide"><img src="{% static 'images/img22.png' %}" alt="Image 3"></div>
+          </div>
+          <button class="prev" onclick="prevSlide(1)">&#10094;</button>
+          <button class="next" onclick="nextSlide(1)">&#10095;</button>
+      </div>
+      <div class="hover-container">
+          <!--<div><img src="{% static 'images/shop8.png' %}" alt="Vest Image" ></div>-->
+          <div><img src="{% static 'images/img12.png' %}" alt="Image 1"></div>
+          <div><img src="{% static 'images/img33.png' %}" alt="Image 2"></div>
+          <div><img src="{% static 'images/img22.png' %}" alt="Image 3"></div>
+      </div>
+  </div>
+      
+  <div class="product-div-right">
+    <span class="product-title" style="font-size: 30px;">Safety Vest</span>
+    <div class="product-description" style="text-align: justify; font-size: 20px;">Wear a 25MPH vest to walk, jog or run safely with the lightweight, silkscreen printed on both front and back </div>
+    <span class="product-price" style="display: flex; font-size: 25px;" id="productPrice">$12.99</span>
+    <div class="btn-groups">
+        <div class="size">
+            <label style="margin-right: 5px; font-size: 20px;">Size: </label>
+            <select id="sizeDropdown" onchange="updatePriceAndTotal()">
+                {% for vest in vests %}
+                    <option value="{{ vest.size }}" data-price="{{ vest.price }}">{{ vest.size }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <a type="button" class="button" onclick="togglePopup()" style="margin-top: 10px; color: blue; text-decoration: underline; display: flex; font-size: 20px;">Size Chart</a>
+        <br>
+        <div class="quantity" style="display: flex; height: 30px;">
+            <label style="margin-right: 5px; font-size: 20px;">Quantity: </label>
+            <input type="number" id="quantityInput" value="1" min="1" style="width: 100px;" oninput="updatePriceAndTotal()">
+        </div>
+        <br>
+        <button type="button" class="add-cart-btn" onclick="addToCart()" style="margin-top: 10px; width: 150px;">
+            <i class="fas-fa-shopping-cart"></i> Add to Cart
+        </button> 
+    </div>
+   
+</div>
+
+<script>
+    function updatePriceAndTotal() {
+        var sizeDropdown = document.getElementById("sizeDropdown");
+        var selectedOption = sizeDropdown.options[sizeDropdown.selectedIndex];
+        var price = parseFloat(selectedOption.getAttribute("data-price"));
+        
+        var quantityInput = document.getElementById("quantityInput");
+        var quantity = parseInt(quantityInput.value);
+        
+        var totalPrice = price * quantity;
+        document.getElementById("productPrice").innerText = "$" + price.toFixed(2);
+        document.getElementById("totalPrice").innerText = "$" + totalPrice.toFixed(2);
+    }
+</script>
+
+
+
+         
+        <div class="popup" id="popup-1">
+          <div class="overlay"></div>
+          <div class="content">
+            <div class="close-btn" onclick="togglePopup()">&times;</div>
+            
+            <table class="size-chart-table">
+              <thead>
+                <tr>
+                  <th>Size</th>
+                  <th>Width</th>
+                  <th>Length</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>S</td>
+                  <td>13cm / 33.02inch</td>
+                  <td>22cm / 55.88inch</td>
+                </tr>
+                <tr>
+                  <td>M</td>
+                  <td>16.5cm / 41.91inch</td>
+                  <td>25cm / 63.5inch</td>
+                </tr>
+                <tr>
+                  <td>L</td>
+                  <td>27cm / 68.58inch</td>
+                  <td>18cm / 45.72inch</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <script>
+          function togglePopup() {
+            document.getElementById("popup-1").classList.toggle("active");
+          }
+        </script>
+      </div>
+
+          
+        </div>
+      <!--</div>-->
+
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+    <div id ="cartSymbol" class="cart-symbol">🛒</div>
+
+    <script>
+
+    // Function to slide images
+    let slideIndex1 = 0;
+
+    function showSlide(n, sliderIndex) {
+        const slides = document.querySelectorAll(`.slider${sliderIndex} .slide`);
+        if (slides.length === 0) return;
+        const index = (n + slides.length) % slides.length;
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = 'none';
+        }
+        slides[index].style.display = 'block';
+        if (sliderIndex === 1) {
+            slideIndex1 = index;
+        }
+    }
+
+    function nextSlide(sliderIndex) {
+        if (sliderIndex === 1) {
+            showSlide(slideIndex1 + 1, 1);
+        }
+    }
+
+    function prevSlide(sliderIndex) {
+        if (sliderIndex === 1) {
+            showSlide(slideIndex1 - 1, 1);
+        }
+    }
+
+    showSlide(slideIndex1, 1);
+
+
+        let cartItems = 0;
+
+        window.onload = function () {
+            document.getElementById('cartSymbol').addEventListener('click', function () {
+                window.location.href = "{% url 'cart_page' %}";
+            });
+            fetchCartItemCount();
+            updateCartSymbol();
+        };
+
+        function fetchCartItemCount() {
+            fetch("{% url 'get_cart_item_count' %}")
+                .then(response => response.json())
+                .then(data => {
+                    cartItems = data.count;
+                    updateCartSymbol();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function updateCartSymbol() {
+            const cartSymbol = document.getElementById('cartSymbol');
+            const cartBackground = document.getElementById('cartBackground');
+
+            if (cartItems > 0) {
+                cartBackground.innerText = '🛒' + cartItems;
+                cartBackground.style.backgroundColor = 'green'; // Change background color
+            } else {
+                cartBackground.innerText = '🛒';
+                cartBackground.style.backgroundColor = 'transparent'; // Reset background color
+            }
+        }
+        function addToCart() {
+          const sizeDropdown = document.getElementById("sizeDropdown");
+          const selectedSize = sizeDropdown.options[sizeDropdown.selectedIndex].value;
+          const quantityInput = document.getElementById("quantityInput");
+          const quantity = parseInt(quantityInput.value);
+
+          const url = `/add_to_cart/${quantity}/${selectedSize}/`;
+          window.location.href = url; // Redirect to the cart page URL
+}
+
+
+      function updateCartSymbol() {
+        const cartSymbol = document.getElementById('cartSymbol');
+        if (cartItems > 0) {
+            cartSymbol.innerText = '🛒' + cartItems;
+        } else {
+            cartSymbol.innerText = '🛒  ';
+        }
+    }
+ // Function to update background image
+    const backgroundImages = [
+        "{% static 'images/ss1.jpg' %}",
+        "{% static 'images/ss4.jpg' %}",
+        "{% static 'images/s1.jpeg' %}"
+        
+    ];
+    function updateBackgroundImage() {
+        const randomIndex = Math.floor(Math.random() * backgroundImages.length);
+        const imageUrl = backgroundImages[randomIndex];
+        document.getElementById('home').style.backgroundImage = `url(${imageUrl})`;
+    }
+
+    updateBackgroundImage();
+    setInterval(updateBackgroundImage, 5000); 
+
+
+
+    // Function to update hover images
+    const allHoverImages = document.querySelectorAll('.hover-container div img')
+    const imgContainer = document.querySelector('.product-slider')
+
+    window.addEventListener('DOMContentLoaded',() =>{
+      allHoverImages[0].parentElement.classList.add('active');
+    } );
+
+    allHoverImages.forEach((image) =>{
+      image.addEventListener('mouseover',() =>{
+        imgContainer.querySelector('img').src= image.src;
+        image.parentElement.classList.add('active');
+      });
+    });
+
+    function resetActiveImg(){
+      allHoverImages.forEach((img) => {
+        img.parentElement.classList.remove('active');
+      });
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+    var donateLink = document.getElementById('donateLink');
+    donateLink.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default link behavior
+
+        var url = "https://www.paypal.com/donate?hosted_button_id=VVFT6TBDPMCZL&no_recurring=0&currency_code=USD";
+        var width = 600;
+        var height = 400;
+        var left = (window.innerWidth - width) / 2;
+        var top = (window.innerHeight - height) / 2;
+        var options = 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=' + width + ',height=' + height + ',top=' + top + ',left=' + left;
+
+        window.open(url, 'PayPal_Donation', options); // Open the popup window
+    });
+  });
+
+    
+
+    </script>
+
+    
+
+
+<footer style="padding: 1em; text-align: center;">
+  <p style="margin-bottom: auto;"><b>Contact Us:</b> <a href="mailto:25mphvest@gmail.com">25mphvest@gmail.com</a> <br>
+    
+</footer>
+
+
+  </body>
+</html>
